@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addNode } from '../../actions/snakes.js'
+import Pointer from '../pointer'
 
 class Snake extends Component {
   render() {
     console.log(this.props)
     return (
-      <div>
-        snake list
-        <button onClick={() => this.props.addNode('tan')}>AddNode </button>
-      </div>
+      <g>
+        <Pointer x="200" y="300" />
+      </g>
     )
   }
 }

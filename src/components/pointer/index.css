@@ -1,0 +1,19 @@
+.pointer {
+  width: 8px;
+  height: 8px;
+  fill: #ee76a1;
+}
+
+@keyframes blinking {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: .3;
+  }
+}
+
+.keeping {
+  animation: blinking 0.4s linear infinite alternate;
+}
+

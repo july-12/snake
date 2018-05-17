@@ -3,6 +3,8 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import storeIndex from './reducers'
 
+import Canvas from './components/canvas'
+import Meat from './components/meat'
 import Snake from './components/snakes'
 
 const store = createStore(storeIndex)
@@ -12,7 +14,10 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div className="content">
-          <Snake />
+          <Canvas>
+            <Snake />
+            <Meat />
+          </Canvas>
         </div>
       </Provider>
     )
