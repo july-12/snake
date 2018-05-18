@@ -27,22 +27,35 @@ class Canvas extends Component {
     return _.isEqual(head, meat)
   }
   calcNextMoving = () => {
+    let { width, height } = this.svgRef.current.getBoundingClientRect()
     let { list, direction } = this.props.snakes
-
     let head = { ...list[list.length - 1] }
     let [, ...tail] = list
+
     switch (direction) {
       case directionType.LEFT:
         head.x -= STEP
+        if (head.x < 0) {
+          head.x = width - STEP
+        }
         break
       case directionType.TOP:
         head.y -= STEP
+        if (head.y < 0) {
+          head.y = height - STEP
+        }
         break
       case directionType.RIGHT:
         head.x += STEP
+        if (head.x >= width) {
+          head.x = 0
+        }
         break
       default:
         head.y += STEP
+        if (head.y > height) {
+          head.y = 0
+        }
         break
     }
     return tail.concat(head)
@@ -59,8 +72,8 @@ class Canvas extends Component {
 
         let { width, height } = this.svgRef.current.getBoundingClientRect()
 
-        let x = _.random(Math.floor(width / 10)) * 10
-        let y = _.random(Math.floor(height / 10)) * 10
+        let x = _.random(width / 10 - 1) * 10
+        let y = _.random(height / 10 - 1) * 10
 
         this.props.dispatch(eatMeat(list.concat(meat)))
         this.props.dispatch(randomMeat({ x, y }))
