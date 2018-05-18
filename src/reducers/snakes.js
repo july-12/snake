@@ -1,7 +1,7 @@
 import { actionType } from '../actions/snakes.js'
 
 let initialState = {
-  list: []
+  list: [{ x: 200, y: 300 }, { x: 210, y: 300 }]
 }
 export default (state = initialState, action) => {
   switch (action.type) {

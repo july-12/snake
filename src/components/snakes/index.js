@@ -1,25 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import { addNode } from '../../actions/snakes.js'
+import lodash from 'lodash'
 import Pointer from '../pointer'
+let _ = lodash
 
-class Snake extends Component {
-  render() {
-    console.log(this.props)
-    return (
-      <g>
-        <Pointer x="200" y="300" />
-      </g>
-    )
-  }
+const Snake = ({ list }) => {
+  return <g>{_.map(list, ({ x, y }, index) => <Pointer key={index} x={x} y={y} />)}</g>
 }
 
 const mapStateToProps = state => ({
   list: state.snakes.list
 })
 
-const mapDispatchToProps = dispatch => ({
-  addNode: node => dispatch(addNode(node))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Snake)
+export default connect(mapStateToProps)(Snake)
