@@ -1,43 +1,67 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { moving, changeDirection, directionType } from '../../actions/snakes.js'
 import './index.css'
 
-const DURATION = 1000
+const DURATION = 200
 const STEP = 10
 
 class Canvas extends Component {
   componentDidMount() {
     this.snakeStartMoving()
+    this.keyBind()
   }
-  calculateMovingPos = () => {
+  calcNextMoving = () => {
     let { list, direction } = this.props.snakes
     let { meat } = this.props
 
-    let newList = list.slice(1)
-    let snakeHead = list[list.length - 1]
+    let head = { ...list[list.length - 1] }
+    let [, ...tail] = list
     switch (direction) {
-      case 'LEFT':
-        snakeHead.x -= STEP
+      case directionType.LEFT:
+        head.x -= STEP
         break
-      case 'TOP':
-        snakeHead.y -= STEP
+      case directionType.TOP:
+        head.y -= STEP
         break
-      case 'RIGHT':
-        snakeHead.x += STEP
+      case directionType.RIGHT:
+        head.x += STEP
         break
       default:
-        snakeHead.y += STEP
+        head.y += STEP
         break
     }
+    return tail.concat(head)
   }
   snakeStartMoving = () => {
-    let t = setInterval(() => {
-      let newList = calculateMovingPos()
-      this.props.moving(newList)
+    this.t = setInterval(() => {
+      let newList = this.calcNextMoving()
+      this.props.dispatch(moving(newList))
     }, DURATION)
+  }
+  checkIsValidateArrowKey = keyCode => {
+    let { direction } = this.props.snakes
+    let isArrowKey = Object.values(directionType).indexOf(keyCode) > -1
+    //checking sum of keycode and direction is odd
+    let isValid = (direction + keyCode) % 2 === 1
+    return isArrowKey && isValid
+  }
+  handleKeyUp = e => {
+    if (this.checkIsValidateArrowKey(e.keyCode)) {
+      this.props.dispatch(changeDirection(e.keyCode))
+    }
+  }
+  keyBind = () => {
+    document.addEventListener('keyup', this.handleKeyUp)
   }
   render() {
     return <svg>{this.props.children}</svg>
   }
 }
 
-export default Canvas
+const mapStateToProps = state => ({
+  snakes: state.snakes,
+  meat: state.meat
+})
+
+export default connect(mapStateToProps)(Canvas)
