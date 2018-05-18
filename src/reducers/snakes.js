@@ -9,6 +9,7 @@ export default (state = initialState, action) => {
     case actionType.ADD_NODE:
       return { ...state, list: [...state.list, action.payload] }
     case actionType.MOVING:
+    case actionType.EAT_MEAT:
       return { ...state, list: action.payload }
     case actionType.CHANGE_DIRECTION:
       return { ...state, direction: action.payload }

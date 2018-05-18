@@ -1,8 +1,8 @@
 export const actionType = {
-  CHANGE_POSITION: 'CHANGE_POSITION'
+  RANDOM_MEAT: 'RANDOM_MEAT'
 }
 
-export const changeRandomPos = () => ({
-  type: actionType.CHANGE_POSITION,
-  payload: { x: 100, y: 200 }
+export const randomMeat = ({ x, y }) => ({
+  type: actionType.RANDOM_MEAT,
+  payload: { x, y }
 })

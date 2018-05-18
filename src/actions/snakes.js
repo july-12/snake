@@ -7,6 +7,7 @@ export const directionType = {
 export const actionType = {
   ADD_NODE: 'ADD_NODE',
   MOVING: 'MOVING',
+  EAT_MEAT: 'EAT_MEAT',
   CHANGE_DIRECTION: 'CHANGE_DIRECTION'
 }
 
@@ -23,4 +24,9 @@ export const moving = list => ({
 export const changeDirection = direction => ({
   type: actionType.CHANGE_DIRECTION,
   payload: direction
+})
+
+export const eatMeat = list => ({
+  type: actionType.EAT_MEAT,
+  payload: list
 })
