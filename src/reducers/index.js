@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
 import speed from './speed.js'
-import snakes from './snakes.js'
+import snake from './snake.js'
 import meat from './meat.js'
 
 export default combineReducers({
   speed,
-  snakes,
+  snake,
   meat
 })

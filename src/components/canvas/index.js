@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { moving, changeDirection, eatMeat, directionType } from '../../actions/snakes.js'
+import { moving, changeDirection, eatMeat, directionType } from '../../actions/snake.js'
 import { randomMeat } from '../../actions/meat.js'
 import lodash from 'lodash'
 import './index.css'
@@ -32,7 +32,7 @@ class Canvas extends Component {
   }
   calcNextMoving = () => {
     let { width, height } = this.svgRef.current.getBoundingClientRect()
-    let { list, direction } = this.props.snakes
+    let { list, direction } = this.props.snake
     let head = { ...list[list.length - 1] }
     let [, ...tail] = list
 
@@ -74,7 +74,7 @@ class Canvas extends Component {
         clearInterval(this.t)
         return alert('game over')
       } else if (this.hasEatenMeat(nextList)) {
-        let { list } = this.props.snakes
+        let { list } = this.props.snake
         let { meat } = this.props
 
         let { width, height } = this.svgRef.current.getBoundingClientRect()
@@ -90,7 +90,7 @@ class Canvas extends Component {
     }, rate)
   }
   checkIsValidateArrowKey = keyCode => {
-    let { direction } = this.props.snakes
+    let { direction } = this.props.snake
     let isArrowKey = Object.values(directionType).indexOf(keyCode) > -1
     //checking sum of keycode and direction is odd
     let isValid = (direction + keyCode) % 2 === 1
@@ -110,7 +110,7 @@ class Canvas extends Component {
 }
 
 const mapStateToProps = state => ({
-  snakes: state.snakes,
+  snake: state.snake,
   meat: state.meat,
   rate: state.speed.rate
 })

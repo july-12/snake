@@ -9,7 +9,7 @@ const Snake = ({ list }) => {
 }
 
 const mapStateToProps = state => ({
-  list: state.snakes.list
+  list: state.snake.list
 })
 
 export default connect(mapStateToProps)(Snake)

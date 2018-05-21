@@ -1,4 +1,4 @@
-import { actionType, directionType } from '../actions/snakes.js'
+import { actionType, directionType } from '../actions/snake.js'
 
 let initialState = {
   list: [{ x: 200, y: 300 }, { x: 210, y: 300 }, { x: 220, y: 300 }],
