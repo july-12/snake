@@ -6,7 +6,6 @@ import lodash from 'lodash'
 import './index.css'
 let _ = lodash
 
-const DURATION = 200
 const STEP = 10
 
 class Canvas extends Component {
@@ -17,6 +16,11 @@ class Canvas extends Component {
   componentDidMount() {
     this.snakeStartMoving()
     this.keyBind()
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.rate !== this.props.rate) {
+      this.snakeStartMoving(nextProps)
+    }
   }
   checkGameOver = nextList => {
     return _.unionWith(nextList, _.isEqual).length !== nextList.length
@@ -60,7 +64,10 @@ class Canvas extends Component {
     }
     return tail.concat(head)
   }
-  snakeStartMoving = () => {
+  snakeStartMoving = ({ rate } = this.props) => {
+    if (this.t) {
+      clearInterval(this.t)
+    }
     this.t = setInterval(() => {
       let nextList = this.calcNextMoving()
       if (this.checkGameOver(nextList)) {
@@ -80,7 +87,7 @@ class Canvas extends Component {
       } else {
         this.props.dispatch(moving(nextList))
       }
-    }, DURATION)
+    }, rate)
   }
   checkIsValidateArrowKey = keyCode => {
     let { direction } = this.props.snakes
@@ -104,7 +111,8 @@ class Canvas extends Component {
 
 const mapStateToProps = state => ({
   snakes: state.snakes,
-  meat: state.meat
+  meat: state.meat,
+  rate: state.speed.rate
 })
 
 export default connect(mapStateToProps)(Canvas)

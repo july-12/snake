@@ -1,7 +1,7 @@
 .pointer {
   width: 10px;
   height: 10px;
-  fill: #000;
+  fill: #fff;
 }
 
 @keyframes blinking {
