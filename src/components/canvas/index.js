@@ -92,7 +92,7 @@ class Canvas extends Component {
   checkIsValidateArrowKey = keyCode => {
     let { direction } = this.props.snake
     let isArrowKey = Object.values(directionType).indexOf(keyCode) > -1
-    //checking sum of keycode and direction is odd
+    //can't change direction on same pathway
     let isValid = (direction + keyCode) % 2 === 1
     return isArrowKey && isValid
   }

@@ -2,13 +2,13 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Pointer from '../pointer'
 
-const Meat = props => {
-  return <Pointer {...props.pos} className={props.className} />
+const Meat = ({ x, y }) => {
+  return <Pointer className="blink" x={x} y={y} />
 }
 
 const mapStateToProps = state => ({
-  pos: state.meat,
-  className: 'keeping'
+  x: state.meat.x,
+  y: state.meat.y
 })
 
 export default connect(mapStateToProps)(Meat)

@@ -13,7 +13,7 @@
   }
 }
 
-.keeping {
+.blink {
   animation: blinking 0.4s linear infinite alternate;
 }
 
