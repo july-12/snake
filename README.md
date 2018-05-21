@@ -1,4 +1,4 @@
-# 贪吃蛇小游戏
+# Gluttonous Snake
 
 ![alt text](/snake.png)
 
