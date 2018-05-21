@@ -1,10 +1,11 @@
 # 贪吃蛇小游戏
 
+![alt text](/snake.png)
+
 ## Tech
 
     react + redux + svg
 
-![alt text](/snake.png)
 
 ## Run Project
 
